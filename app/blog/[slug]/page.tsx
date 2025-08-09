@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -9,6 +10,11 @@ import AuthorCard from '@/components/blog/author-card';
 import CommentsSection from '@/components/blog/comments-section';
 import Sidebar from '@/components/blog/sidebar';
 import { getPostBySlug, blogPosts } from '@/data/blog-data';
+
+// Required for Next.js static export of dynamic routes
+export async function generateStaticParams() {
+  return blogPosts.map(post => ({ slug: post.slug }));
+}
 
 interface BlogPostPageProps {
   params: {
